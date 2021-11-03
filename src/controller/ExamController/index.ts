@@ -12,29 +12,30 @@ interface SampleAttributes {
 
 export default {
 	async addExam(req: Request, res: Response) {
-		const parasitologicalExam = await ParasitologicalExam.create({
-			data_de_emissao: req.body.data.data_de_emissao,
-			resultado: req.body.data.resultado,
-			id_paciente: req.body.data.id_paciente,
-		})
-
-		for (const parasitologicalSample of req.body.data.amostrasParasitologicas) {
-			await ParasitologicalSample.create({
-				data_de_amostra: parasitologicalSample.data_de_amostra,
-				id_exame: parasitologicalExam.id,
-				primeira_lamina: parasitologicalSample.primeira_lamina,
-				segunda_lamina: parasitologicalSample.segunda_lamina,
-			})
-		}
-
-		const amostrasParasitologicas =
-			await parasitologicalExam.getAmostrasParasitologicas()
-		const response = {
-			...parasitologicalExam.get(),
-			amostrasParasitologicas: amostrasParasitologicas,
-		}
-
 		try {
+			const parasitologicalExam = await ParasitologicalExam.create({
+				data_de_emissao: req.body.data.data_de_emissao,
+				resultado: req.body.data.resultado,
+				id_paciente: req.body.data.id_paciente,
+			})
+
+			for (const parasitologicalSample of req.body.data
+				.amostrasParasitologicas) {
+				await ParasitologicalSample.create({
+					data_de_amostra: parasitologicalSample.data_de_amostra,
+					id_exame: parasitologicalExam.id,
+					primeira_lamina: parasitologicalSample.primeira_lamina,
+					segunda_lamina: parasitologicalSample.segunda_lamina,
+				})
+			}
+
+			const amostrasParasitologicas =
+				await parasitologicalExam.getAmostrasParasitologicas()
+			const response = {
+				...parasitologicalExam.get(),
+				amostrasParasitologicas: amostrasParasitologicas,
+			}
+
 			return res.send(response).status(200).end()
 		} catch (error) {
 			return res.sendStatus(400).end()
