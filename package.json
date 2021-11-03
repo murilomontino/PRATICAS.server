@@ -11,9 +11,9 @@
 	"scripts": {
 		"lint": "eslint src  data --ext .ts --fix",
 		"dev": "cross-env NODE_ENV=development ts-node-dev --inspect --respawn --transpile-only src/index.ts",
-		"create": "sucrase ./src -d ./lib/src --transforms typescript,imports",
+		"build": "sucrase ./src -d ./lib/src --transforms typescript,imports",
 		"postbuild": "sucrase ./data -d ./lib/data --transforms typescript,imports",
-		"build": "node lib/src/index.js",
+		"start": "node lib/src/index.js",
 		"start:dev": "ts-node-dev --inspect --respawn --transpile-only src/index.ts",
 		"prod": "cross-env NODE_ENV=production ts-node-dev --inspect --respawn --transpile-only src/index.ts",
 		"genDoc": "node swagger.js",
