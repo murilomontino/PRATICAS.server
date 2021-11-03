@@ -6,42 +6,48 @@ const { DateController } = database
 
 export default {
 	async validDateDatabasePatient(req: Request, res: Response) {
-		const dateBefore = await DateController.GetDatePatient()
-		const dateAfter = req.body.data.date // DATA ATUAL DO APP
+		try {
+			const dateBefore = await DateController.GetDatePatient()
+			const dateAfter = req.body.data.date // DATA ATUAL DO APP
 
-		if (dateBefore && dateBefore > dateAfter) {
-			res.sendStatus(200).end()
-		} else {
-			res.sendStatus(400).end()
-		}
+			if (dateBefore && dateBefore > dateAfter) {
+				res.sendStatus(200).end()
+			} else {
+				res.sendStatus(400).end()
+			}
 
-		return
+			return
+		} catch (error) {}
 	},
 
 	async validDateDatabaseExams(req: Request, res: Response) {
-		const dateBefore = await DateController.GetDateParasitologicalExam()
-		const dateAfter = req.body.data.date // DATA ATUAL DO APP
+		try {
+			const dateBefore = await DateController.GetDateParasitologicalExam()
+			const dateAfter = req.body.data.date // DATA ATUAL DO APP
 
-		if (dateBefore && dateBefore > dateAfter) {
-			res.sendStatus(200).end()
-		} else {
-			res.sendStatus(400).end()
-		}
+			if (dateBefore && dateBefore > dateAfter) {
+				res.sendStatus(200).end()
+			} else {
+				res.sendStatus(400).end()
+			}
 
-		return
+			return
+		} catch (error) {}
 	},
 
 	async validDateDatabaseUBS(req: Request, res: Response) {
-		const dateBefore = await DateController.GetDateUBS()
-		const dateAfter = req.body.data.date // DATA ATUAL DO APP
+		try {
+			const dateBefore = await DateController.GetDateUBS()
+			const dateAfter = req.body.data.date // DATA ATUAL DO APP
 
-		if (dateBefore && dateBefore > dateAfter) {
-			res.sendStatus(200).end()
-		} else {
-			res.sendStatus(400).end()
-		}
+			if (dateBefore && dateBefore > dateAfter) {
+				res.sendStatus(200).end()
+			} else {
+				res.sendStatus(400).end()
+			}
 
-		return
+			return
+		} catch (error) {}
 	},
 
 	async validDateDatabaseUsers(req: Request, res: Response) {
@@ -60,15 +66,17 @@ export default {
 	},
 
 	async validDateDatabaseSnails(req: Request, res: Response) {
-		const dateBefore = await DateController.GetDateSnail()
-		const dateAfter = req.body.data.date // DATA ATUAL DO APP
+		try {
+			const dateBefore = await DateController.GetDateSnail()
+			const dateAfter = req.body.data.date // DATA ATUAL DO APP
 
-		if (dateBefore && dateBefore > dateAfter) {
-			res.sendStatus(200).end()
-		} else {
-			res.sendStatus(400).end()
-		}
+			if (dateBefore && dateBefore > dateAfter) {
+				res.sendStatus(200).end()
+			} else {
+				res.sendStatus(400).end()
+			}
 
-		return
+			return
+		} catch (error) {}
 	},
 }
