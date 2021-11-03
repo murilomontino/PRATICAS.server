@@ -1,13 +1,13 @@
 {
-	"name": "TecnoSchisto/server",
+	"name": "server",
 	"version": "1.0.0",
 	"private": true,
 	"main": "lib/index.js",
 	"author": "Grupo TecnoSchisto",
 	"license": "MIT",
 	"engines": {
-    "node": "14.18.1"
-  },
+		"node": "16.13.0"
+	},
 	"scripts": {
 		"lint": "eslint src  data --ext .ts --fix",
 		"dev": "cross-env NODE_ENV=development ts-node-dev --inspect --respawn --transpile-only src/index.ts",
