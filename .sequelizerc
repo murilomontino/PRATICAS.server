@@ -1,0 +1,13 @@
+require('dotenv').config()
+
+var path = require('path')
+
+var mode = process.env.NODE_ENV || 'development'
+
+module.exports = {
+	env: mode,
+	config: path.resolve('data/config', 'options.js'),
+	'migrations-path': path.resolve('data/migrations'),
+	'models-path': path.resolve('data/models'),
+	'seeders-path': path.resolve('data/seeders'),
+}

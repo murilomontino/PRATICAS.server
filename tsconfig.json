@@ -1,0 +1,25 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+
+	"display": "Node 14",
+	"exclude": ["node_modules", "lib"],
+	"compilerOptions": {
+		"jsx": "react-native",
+		"target": "ES2020",
+		"module": "CommonJS",
+		"lib": ["es2020"],
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"allowJs": true,
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"outDir": "./dist"
+	},
+	"include": ["src/**/*", "index.ts"],
+
+	"rules": []
+}
