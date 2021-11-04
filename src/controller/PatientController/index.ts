@@ -16,82 +16,84 @@ const {
 
 export default {
 	async get(req: Request, res: Response) {
-		if (req.body.data.permissao === Permission.SecretarioDaSaude) {
-			const response = await Patient.findAll({
-				include: [
-					{
-						model: ParasitologicalExam,
-						include: [
-							ParasitologicalSample,
-							{
-								model: Patient,
-								attributes: ['nome', 'sobrenome'],
-							},
-						],
-					},
-					Address,
-					QuestionnairePatient,
-					QuestionnaireFamily,
-					{
-						model: UBS,
-						attributes: ['nome'],
-						where: {
-							codIbge: req.body.data.codIbge,
+		try {
+			if (req.body.data.permissao === Permission.SecretarioDaSaude) {
+				const response = await Patient.findAll({
+					include: [
+						{
+							model: ParasitologicalExam,
+							include: [
+								ParasitologicalSample,
+								{
+									model: Patient,
+									attributes: ['nome', 'sobrenome'],
+								},
+							],
 						},
-					},
-				],
-				where: {
-					is_patient: true,
-				},
-			})
-
-			const datePatient = await DateController.GetDatePatient()
-
-			return res
-				.status(200)
-				.send({
-					dateNow: datePatient,
-					database: response,
-				})
-				.end()
-		} else {
-			const response = await Patient.findAll({
-				include: [
-					{
-						model: ParasitologicalExam,
-						order: [['createdAt', 'ASC']],
-						include: [
-							ParasitologicalSample,
-							{
-								model: Patient,
-								attributes: ['nome', 'sobrenome'],
+						Address,
+						QuestionnairePatient,
+						QuestionnaireFamily,
+						{
+							model: UBS,
+							attributes: ['nome'],
+							where: {
+								codIbge: req.body.data.codIbge,
 							},
-						],
+						},
+					],
+					where: {
+						is_patient: true,
 					},
-					Address,
-					QuestionnairePatient,
-					QuestionnaireFamily,
-					{
-						model: UBS,
-						attributes: ['nome'],
-					},
-				],
-				where: {
-					is_patient: true,
-					ubs: req.body.data.ubs,
-				},
-			})
-
-			const datePatient = await DateController.GetDatePatient()
-
-			return res
-				.status(200)
-				.send({
-					dateNow: datePatient,
-					database: response,
 				})
-				.end()
-		}
+
+				const datePatient = await DateController.GetDatePatient()
+
+				return res
+					.status(200)
+					.send({
+						dateNow: datePatient,
+						database: response,
+					})
+					.end()
+			} else {
+				const response = await Patient.findAll({
+					include: [
+						{
+							model: ParasitologicalExam,
+							order: [['createdAt', 'ASC']],
+							include: [
+								ParasitologicalSample,
+								{
+									model: Patient,
+									attributes: ['nome', 'sobrenome'],
+								},
+							],
+						},
+						Address,
+						QuestionnairePatient,
+						QuestionnaireFamily,
+						{
+							model: UBS,
+							attributes: ['nome'],
+						},
+					],
+					where: {
+						is_patient: true,
+						ubs: req.body.data.ubs,
+					},
+				})
+
+				const datePatient = await DateController.GetDatePatient()
+
+				return res
+					.status(200)
+					.send({
+						dateNow: datePatient,
+						database: response,
+					})
+					.end()
+			}
+		} catch (error) {}
 	},
 
 	async archive(req: Request, res: Response) {
